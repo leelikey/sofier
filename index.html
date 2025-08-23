@@ -9,6 +9,45 @@
     <!-- 引入 EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 96%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
     .status {
       margin-top: 15px;
       font-size: 14px;
@@ -412,6 +451,7 @@ and cross-cultural communication skills.
                     </div>
                 </div>
             </div>
+            <div class="form-container">
             <form id="contactForm">
     <label for="name">姓名：</label>
     <input type="text" id="name" name="name" placeholder="请输入您的姓名" required />
@@ -428,6 +468,7 @@ and cross-cultural communication skills.
     <div id="status" class="status">✅ 信息已成功发送！</div>
     <div id="error" class="status error" style="display:none;"></div>
   </form>
+</div>
 </div>
 
 <script>
@@ -491,5 +532,6 @@ and cross-cultural communication skills.
 </body>
 
 </html>
+
 
 
