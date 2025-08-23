@@ -27,7 +27,7 @@
       font-weight: bold;
     }
     input, textarea {
-      width: 96%;
+      width: 98%;
       padding: 10px;
       margin-top: 5px;
       border: 1px solid #ccc;
@@ -453,19 +453,19 @@ and cross-cultural communication skills.
             </div>
             <div class="form-container">
             <form id="contactForm">
-    <label for="name">姓名：</label>
-    <input type="text" id="name" name="name" placeholder="请输入您的姓名" required />
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Input your name!" required />
 
-    <label for="phone">电话：</label>
-    <input type="tel" id="phone" name="phone" placeholder="请输入您的电话" required />
+    <label for="phone">Email:</label>
+    <input type="tel" id="phone" name="phone" placeholder="Input your email!" required />
 
-    <label for="address">地址：</label>
-    <textarea id="address" name="address" rows="3" placeholder="请输入您的地址" required></textarea>
+    <label for="address">Message</label>
+    <textarea id="address" name="address" rows="3" placeholder="Input your Message!" required></textarea>
 
-    <button type="submit">提交</button>
+    <button type="submit">Submit</button>
 
     <!-- 状态提示 -->
-    <div id="status" class="status">✅ 信息已成功发送！</div>
+    <div id="status" class="status">✅ Submission successful!</div>
     <div id="error" class="status error" style="display:none;"></div>
   </form>
 </div>
@@ -491,13 +491,13 @@ and cross-cultural communication skills.
     // 收集表单数据
     const formData = {
       name: document.getElementById('name').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
-      address: document.getElementById('address').value.trim()
+      phone: document.getElementById('email').value.trim(),
+      address: document.getElementById('message').value.trim()
     };
 
     // 可选：前端验证
-    if (!formData.name || !formData.phone || !formData.address) {
-      errorDiv.textContent = '请填写所有字段！';
+    if (!formData.name || !formData.email || !formData.message) {
+      errorDiv.textContent = 'Please fill in all fields!';
       errorDiv.style.display = 'block';
       return;
     }
@@ -505,7 +505,7 @@ and cross-cultural communication skills.
     // 发送邮件（📌 替换 serviceID 和 templateID）
     emailjs.send('service_n60df1g', 'template_lrcokzk', formData)
       .then(function(response) {
-        console.log('📧 你已预约成功！具体上门时间以电话通知为准，谢谢！', response);
+        console.log('📧 Your message has been sent successfully! We will contact you as soon as possible. Thank you!', response);
         status.classList.add('success');
         status.style.display = 'block';
         document.getElementById('contactForm').reset(); // 清空表单
@@ -532,6 +532,7 @@ and cross-cultural communication skills.
 </body>
 
 </html>
+
 
 
 
