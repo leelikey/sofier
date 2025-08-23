@@ -452,34 +452,33 @@ and cross-cultural communication skills.
                 </div>
             </div>
             <div class="form-container">
-            <form id="contactForm">
+  <form id="contactForm">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" placeholder="Please input your name!" required />
 
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" placeholder="Please input your email!" required />
 
-    <label for="message">Message</label>
-    <textarea id="message" name="message" rows="3" placeholder="Please input your Message!" required></textarea>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="3" placeholder="Please input your message!" required></textarea>
 
     <button type="submit">Submit</button>
 
     <!-- 状态提示 -->
-    <div id="status" class="status">✅ Submission successful!</div>
+    <div id="status" class="status" style="display:none;">✅ Submission successful!</div>
     <div id="error" class="status error" style="display:none;"></div>
   </form>
 </div>
-</div>
 
 <script>
-  // 初始化 EmailJS（📌 替换为你的 Public Key）
+  // 初始化 EmailJS
   (function() {
-    emailjs.init("cxh8gKGCmbOHlp8-z"); // ←← 必须替换！
+    emailjs.init("cxh8gKGCmbOHlp8-z"); // 确保这是你的 Public Key
   })();
 
   // 表单提交事件
   document.getElementById('contactForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // 阻止默认提交行为
+    event.preventDefault();
 
     const status = document.getElementById('status');
     const errorDiv = document.getElementById('error');
@@ -488,27 +487,26 @@ and cross-cultural communication skills.
     status.style.display = 'none';
     errorDiv.style.display = 'none';
 
-    // 收集表单数据
+    // ✅ 正确收集数据：使用语义化字段名
     const formData = {
       name: document.getElementById('name').value.trim(),
-      phone: document.getElementById('email').value.trim(),
-      address: document.getElementById('message').value.trim()
+      email: document.getElementById('email').value.trim(),
+      message: document.getElementById('message').value.trim()
     };
 
-    // 可选：前端验证
+    // ✅ 正确验证字段
     if (!formData.name || !formData.email || !formData.message) {
       errorDiv.textContent = 'Please fill in all fields!';
       errorDiv.style.display = 'block';
       return;
     }
 
-    // 发送邮件（📌 替换 serviceID 和 templateID）
+    // 发送邮件
     emailjs.send('service_n60df1g', 'template_lrcokzk', formData)
       .then(function(response) {
-        console.log('📧 Your message has been sent successfully! We will contact you as soon as possible. Thank you!', response);
-        status.classList.add('success');
+        console.log('📧 Message sent successfully!', response);
         status.style.display = 'block';
-        document.getElementById('contactForm').reset(); // 清空表单
+        document.getElementById('contactForm').reset();
       }, function(err) {
         console.error('❌ 邮件发送失败:', err);
         errorDiv.textContent = '发送失败，请稍后重试。';
@@ -532,6 +530,7 @@ and cross-cultural communication skills.
 </body>
 
 </html>
+
 
 
 
