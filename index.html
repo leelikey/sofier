@@ -394,7 +394,7 @@ and cross-cultural communication skills.
                     </div>
                 </div>
             </div>
-            <form class="contact-form" method="POST" action="/success" data-netlify="true" name="contact">
+            <form id="contactForm">
                 <input type="hidden" name="form-name" value="contact">
                 <div class="form-group">
                     <input type="text" name="name" placeholder="Name" required>
@@ -406,7 +406,55 @@ and cross-cultural communication skills.
                     <textarea name="message" placeholder="Message" required></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Send Message</button>
+                <!-- 状态提示 -->
+                <div id="status" class="status">✅ 信息已成功发送！</div>
+                <div id="error" class="status error" style="display:none;"></div>                
             </form>
+            <script>
+  // 初始化 EmailJS（📌 替换为你的 Public Key）
+  (function() {
+    emailjs.init("cxh8gKGCmbOHlp8-z"); // ←← 必须替换！
+  })();
+
+  // 表单提交事件
+  document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // 阻止默认提交行为
+
+    const status = document.getElementById('status');
+    const errorDiv = document.getElementById('error');
+
+    // 隐藏之前的消息
+    status.style.display = 'none';
+    errorDiv.style.display = 'none';
+
+    // 收集表单数据
+    const formData = {
+      name: document.getElementById('name').value.trim(),
+      phone: document.getElementById('email').value.trim(),
+      address: document.getElementById('message').value.trim()
+    };
+
+    // 可选：前端验证
+    if (!formData.name || !formData.email || !formData.message) {
+      errorDiv.textContent = '请填写所有字段！';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    // 发送邮件（📌 替换 serviceID 和 templateID）
+    emailjs.send('service_n60df1g', 'template_lrcokzk', formData)
+      .then(function(response) {
+        console.log('📧 你已预约成功！具体上门时间以电话通知为准，谢谢！', response);
+        status.classList.add('success');
+        status.style.display = 'block';
+        document.getElementById('contactForm').reset(); // 清空表单
+      }, function(err) {
+        console.error('❌ 邮件发送失败:', err);
+        errorDiv.textContent = '发送失败，请稍后重试。';
+        errorDiv.style.display = 'block';
+      });
+  });
+</script>
             <div class="social-links">
                 <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -421,4 +469,5 @@ and cross-cultural communication skills.
 
     <script src="script.js"></script>
 </body>
+
 </html>
